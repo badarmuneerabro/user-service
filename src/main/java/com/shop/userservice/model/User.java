@@ -9,9 +9,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "USER_DETAILS")
+@Table(name = "USER_DETAILS", uniqueConstraints = @UniqueConstraint(columnNames = {"EMAIL"}))
 
 public class User 
 {

@@ -35,6 +35,47 @@ public class UserServiceImp implements UserService
 		
 		return list;
 	}
+
+	@Override
+	public void save(UserDTO userDTO) 
+	{
+		User user = mapper.map(userDTO, User.class);
+		
+		userRepository.save(user);
+		
+		userDTO.setId(user.getId());
+	}
+	
+	
+	@Override
+	public UserDTO findById(long id) 
+	{
+		User user = userRepository.findById(id).orElse(null);
+		
+		if(user == null) return null;
+		UserDTO userDTO = mapper.map(user, UserDTO.class);
+		
+		return userDTO;
+		
+		
+	}
+	
+	
+	@Override
+	public UserDTO findByEmailAndPassword(String email, String password) 
+	{
+		User user = userRepository.findByEmailAndPassword(email, password);
+		
+		return (user == null) ? null : mapper.map(user, UserDTO.class);
+	}
+	
+	
+	@Override
+	public void deleteUser(UserDTO userDTO) 
+	{
+		User user = mapper.map(userDTO, User.class);
+		userRepository.delete(user);
+	}
 	
 
 }

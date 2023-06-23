@@ -3,13 +3,13 @@ package com.shop.userservice.validators;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import com.shop.userservice.model.Phone;
+import com.shop.userservice.dto.PhoneDTO;
 
-public class PhoneNumberValidator implements ConstraintValidator<PhoneNo, Phone>
+public class PhoneNumberValidator implements ConstraintValidator<PhoneNo, PhoneDTO>
 {
 
 	@Override
-	public boolean isValid(Phone phone, ConstraintValidatorContext context) 
+	public boolean isValid(PhoneDTO phone, ConstraintValidatorContext context) 
 	{
 		if(phone.getCountryCode() == null || phone.getNumber() == null) // if country code or number is null, 
 			return false;												// return false.	

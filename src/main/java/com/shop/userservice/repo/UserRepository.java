@@ -7,4 +7,6 @@ import com.shop.userservice.model.User;
 public interface UserRepository extends JpaRepository<User, Long> 
 {
 
+	User findByEmailAndPassword(String email, String password);
+	
 }
