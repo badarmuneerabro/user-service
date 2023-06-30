@@ -7,7 +7,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.shop.userservice.dto.OrderDTO;
 import com.shop.userservice.dto.UserDTO;
+import com.shop.userservice.fiegnclients.OrderServiceFeignClient;
 import com.shop.userservice.model.User;
 import com.shop.userservice.repo.UserRepository;
 
@@ -19,6 +21,9 @@ public class UserServiceImp implements UserService
 	
 	@Autowired
 	private ModelMapper mapper;
+	
+	@Autowired
+	private OrderServiceFeignClient orderClient;
 
 	@Override
 	public List<UserDTO> findAll() 
@@ -77,5 +82,12 @@ public class UserServiceImp implements UserService
 		userRepository.delete(user);
 	}
 	
+	
+	@Override
+	public List<OrderDTO> getOrdersByUserId(long userId) 
+	{
+		List<OrderDTO> list = orderClient.getOrdersOfUser(userId).getBody();
+		return list;
+	}
 
 }

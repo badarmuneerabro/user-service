@@ -17,7 +17,7 @@ public class UserDTO
 	private String lastName;
 	
 	@NotBlank(message = "*Email is required.")
-	@Email(regexp = ".+[@].+[\\.].+")
+	@Email(regexp = ".+[@].+[\\.].+", message = "*Email not valid.")
 	private String email;
 	
 	@NotBlank(message = "*Password is required.")

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.shop.userservice.dto.OrderDTO;
 import com.shop.userservice.dto.UserDTO;
 import com.shop.userservice.exception.InvalidCredentialsException;
 import com.shop.userservice.exception.ResourceNotFoundException;
@@ -100,6 +101,18 @@ public class UserRestController
 		
 		return new ResponseEntity<>(userDTO, HttpStatus.OK);
 	}
+	
+	
+	
+	@GetMapping("/{userId}/orders")
+	public ResponseEntity<List<OrderDTO>> getOrdersOfUser(@PathVariable("userId") long userId) throws ResourceNotFoundException
+	{
+		verifyUser(userId);
+		List<OrderDTO> list = userService.getOrdersByUserId(userId);
+		
+		return new ResponseEntity<List<OrderDTO>>(list, HttpStatus.OK);
+	}
+	
 	
 	private UserDTO verifyUser(long id) throws ResourceNotFoundException
 	{

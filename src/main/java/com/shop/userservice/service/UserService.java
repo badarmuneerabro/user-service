@@ -2,6 +2,7 @@ package com.shop.userservice.service;
 
 import java.util.List;
 
+import com.shop.userservice.dto.OrderDTO;
 import com.shop.userservice.dto.UserDTO;
 
 public interface UserService 
@@ -15,4 +16,6 @@ public interface UserService
 	void deleteUser(UserDTO userDTO);
 	
 	UserDTO findByEmailAndPassword(String email, String password);
+	
+	List<OrderDTO> getOrdersByUserId(long userId);
 }

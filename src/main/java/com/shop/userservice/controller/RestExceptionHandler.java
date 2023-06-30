@@ -64,11 +64,11 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler
 		return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
 	}
 	
-	
-	@ExceptionHandler(MethodArgumentNotValidException.class)
-	public ResponseEntity<?> methodArgumentNotValidExceptionHandler(MethodArgumentNotValidException exception)
+	@Override
+	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException exception,
+			HttpHeaders headers, HttpStatus status, WebRequest request) 
 	{
-		ErrorDetails error = new ErrorDetails();
+ErrorDetails error = new ErrorDetails();
 		
 		error.setTitle("Field validation error.");
 		error.setMessage("Input validation error.");
@@ -99,6 +99,5 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler
 		
 		return new ResponseEntity<>(error, null, HttpStatus.BAD_REQUEST);
 		
-				
 	}
 }
